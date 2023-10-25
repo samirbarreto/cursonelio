@@ -10,7 +10,6 @@ public class CursonelioApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursonelioApplication.class, args);
-	System.out.println("hellou");
 	}
       
 }
