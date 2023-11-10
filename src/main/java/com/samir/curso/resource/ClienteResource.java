@@ -14,7 +14,7 @@ import com.samir.curso.domain.Cliente;
 import com.samir.curso.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/Clientes")
+@RequestMapping(value = "/clientes")
 public class ClienteResource {
 
 	@Autowired
