@@ -1,5 +1,6 @@
 package com.samir.curso;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,12 @@ import com.samir.curso.domain.Cidade;
 import com.samir.curso.domain.Cliente;
 import com.samir.curso.domain.Endereco;
 import com.samir.curso.domain.Estado;
+import com.samir.curso.domain.Pagamento;
+import com.samir.curso.domain.PagamentoComBoleto;
+import com.samir.curso.domain.PagamentoComCartao;
+import com.samir.curso.domain.Pedido;
 import com.samir.curso.domain.Produto;
+import com.samir.curso.domain.enums.EstadoPagamento;
 import com.samir.curso.domain.enums.TipoCliente;
 import com.samir.curso.repositories.CategoriaRepository;
 import com.samir.curso.repositories.CidadeRepository;
@@ -35,7 +41,7 @@ public class CursonelioApplication implements CommandLineRunner {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CursonelioApplication.class, args);
 	}
@@ -79,11 +85,26 @@ public class CursonelioApplication implements CommandLineRunner {
 
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", " Apto 303", "Jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", " sala 800", "Centro", "38777012", cli1, c2);
-		
-		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
-		
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
 		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Pedido ped1 = new Pedido(null, sdf.parse("30/11/2023 10:00"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("01/11/2023 20:07"), cli1, e2);
+
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2022 00:00"),
+				null);
+		ped1.setPagamento(pagto2);
+
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+
 	}
 
 }
