@@ -11,9 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import org.hibernate.boot.jaxb.mapping.internal.InheritanceTypeMarshalling;
-
 import com.samir.curso.domain.enums.EstadoPagamento;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Pagamento implements Serializable {

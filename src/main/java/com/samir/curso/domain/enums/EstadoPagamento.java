@@ -1,7 +1,5 @@
 package com.samir.curso.domain.enums;
 
-import javax.security.auth.x500.X500Principal;
-
 public enum EstadoPagamento {
 	PENDENTE(1,"Pendente"),
 	QUITADO(2, "Quitado"),
