@@ -2,17 +2,15 @@ package com.samir.curso.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.samir.curso.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
-
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer id;
+	
+//	@NotEmpty(message="Preenchimento obrigatório")
+//	@Lengh(min=5,max=800,message="o tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 	
 	
