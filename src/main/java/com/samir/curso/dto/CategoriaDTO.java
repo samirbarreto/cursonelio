@@ -2,15 +2,19 @@ package com.samir.curso.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
 import com.samir.curso.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	
-//	@NotEmpty(message="Preenchimento obrigatório")
-//	@Lengh(min=5,max=800,message="o tamanho deve ser entre 5 e 80 caracteres")
+    
+    
+    @NotEmpty (message="Preenchimento obrigatório")
+    @Length(min=5,max=800,message="o tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 	
 	
