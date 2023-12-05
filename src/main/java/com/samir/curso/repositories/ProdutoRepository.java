@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.samir.curso.domain.Categoria;
 import com.samir.curso.domain.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository <Produto, Integer>{
-
-	@Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categoris cat WHERE obj.nome LIKE %:nome% AND cat IN : categorias")
+	
+	@Transactional(readOnly=true)
+	@Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cat WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
 	Page<Produto> findDistrinctByNomeContainingAndCategoriasIn(@Param("nome") String nome,@Param("categorias")List<Categoria> categorias, Pageable pageRequest);
 }
