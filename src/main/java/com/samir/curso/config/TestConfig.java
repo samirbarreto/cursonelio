@@ -2,6 +2,9 @@ package com.samir.curso.config;
 
 import java.text.ParseException;
 
+import com.samir.curso.services.EmailService;
+import com.samir.curso.services.MockEmailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,5 +32,9 @@ public class TestConfig {
 
 		dbService.instantiateTestDatabase();
 		return true;
+	}
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
 	}
 }

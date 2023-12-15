@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.samir.curso.domain.ItemPedido;
 import com.samir.curso.domain.PagamentoComBoleto;
-import com.samir.curso.repositories.ClienteRepository;
 import com.samir.curso.domain.Pedido;
 import com.samir.curso.domain.enums.EstadoPagamento;
+import com.samir.curso.repositories.ClienteRepository;
 import com.samir.curso.repositories.ItemPedidoRepository;
 import com.samir.curso.repositories.PagamentoRepository;
 import com.samir.curso.repositories.PedidoRepository;
@@ -29,10 +29,12 @@ public class PedidoService {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	@Autowired
+	@Autowired  
 	private ItemPedidoRepository itemPedidoRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired  
+	private EmailService emailService;
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -59,7 +61,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 
