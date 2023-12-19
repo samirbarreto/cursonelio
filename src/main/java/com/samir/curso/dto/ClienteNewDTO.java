@@ -26,6 +26,9 @@ public class ClienteNewDTO implements Serializable {
 
 	private Integer tipo;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String senha;
+	
 	@NotEmpty(message = "Preenchimento obrigatório")
 	private String logradouro;
 	
@@ -87,6 +90,13 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNumero() {
